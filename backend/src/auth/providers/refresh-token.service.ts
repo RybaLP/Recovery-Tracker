@@ -33,4 +33,18 @@ export class RefreshTokenService{
         })
     }
 
+    async findRefreshTokenByUserId(userId : number) : Promise<RefreshToken | null>{
+        return this.refreshTokenRepository.findOneBy({userId})
+    }
+
+    async deleteRefreshToken(token : string) : Promise<void> {
+        this.refreshTokenRepository.delete({token})
+    }
+
+    async deleteRefreshTokenByUserId(userId : number) : Promise<void>{
+        this.refreshTokenRepository.delete({
+            userId
+        })
+    }
+
 }

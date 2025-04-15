@@ -5,6 +5,9 @@ import { UserModule } from 'src/user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategry';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { RefreshToken } from './refreshToken.entity';
+import { RefreshTokenService } from './providers/refresh-token.service';
 
 const secret = process.env.JWT_SECRET;
 if(!secret){
@@ -19,8 +22,9 @@ if(!secret){
     JwtModule.register({
       secret : secret,
       signOptions : {expiresIn : '1h'}
-    })
+    }),
+    TypeOrmModule.forFeature([RefreshToken])
   ],
-  exports : [AuthService, JwtModule]
+  exports : [AuthService, JwtModule, RefreshTokenService]
 })
 export class AuthModule {}

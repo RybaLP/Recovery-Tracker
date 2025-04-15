@@ -16,7 +16,7 @@ export class AuthService {
 
     /// logging business logic
 
-    public async signIn(loginUserDto : LoginUserDto) : Promise<{access_token:string}>{
+    public async signIn(loginUserDto : LoginUserDto) : Promise<{access_token:string, refreshToken : string}>{
         const user = await this.usersService.findUserByLogin(loginUserDto.login);
         console.log(user);
         if(!user || !(await bcrypt.compare(loginUserDto.password, user.password))){
@@ -25,7 +25,8 @@ export class AuthService {
         const payload = {sub : user.id, login : user.login};
         console.log(payload);
         const access_token = await this.jwtService.signAsync(payload);
-        return {access_token};
+        const refreshToken = await this.refreshTokenService.generateRefreshToken(user)
+        return {access_token, refreshToken: refreshToken.token};
     }
 
     public async refreshAccessToken(refreshToken : string) : Promise<{access_token : string}> {
@@ -43,6 +44,10 @@ export class AuthService {
         const accessToken = await this.jwtService.signAsync(payload);
 
         return {access_token : accessToken};
+    }
+
+    async removeRefreshToken(token : string) : Promise<void>{
+        await this.refreshTokenService.deleteRefreshToken(token);
     }
     
 

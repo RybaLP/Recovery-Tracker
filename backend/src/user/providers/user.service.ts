@@ -36,7 +36,6 @@ export class UserService {
 
     public async register(createUserDto : CreateUserDto){
         try {
-
            const hashedPassword = await this.hashPassword(createUserDto.password);
            const user = this.userRepository.create({...createUserDto, password : hashedPassword});
            await this.userRepository.save(user);
@@ -45,8 +44,5 @@ export class UserService {
             console.error("Problem with creating new user", error);
         }
     }
-
-
-    
 }
 
