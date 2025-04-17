@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { RefreshToken } from "../refreshToken.entity";
@@ -13,18 +13,31 @@ export class RefreshTokenService{
     ){}
 
     async generateRefreshToken(user : User, expiresIn : number = 7*24*60*1000){
-        const token = uuid()
-        const hashedToken = await bcrypt.hash(token, 10)
-        const expiresAt = new Date(Date.now() + expiresIn);
 
-        const refreshToken = this.refreshTokenRepository.create({
-            userId : user.id,
-            token : hashedToken,
-            expiresAt, 
-            user
-        })
+        let token = uuid();
+        let hashedToken : string
+        let expiresAt : Date
+        let refreshToken : RefreshToken
 
-        return this.refreshTokenRepository.save(refreshToken);
+        try {
+            hashedToken = await bcrypt.hash(token, 10)
+            expiresAt = new Date(Date.now() + expiresIn)
+            refreshToken = this.refreshTokenRepository.create({
+                userId : user.id,
+                token : hashedToken,
+                expiresAt,
+                user,
+            })
+
+            if(!refreshToken){
+                throw new InternalServerErrorException("Couldn't create refresh token");
+            }
+
+            return await this.refreshTokenRepository.save(refreshToken);
+
+        } catch (error) {
+            throw new InternalServerErrorException("Problem occured with generating refresh token")
+        }
     }
 
     async findRefreshToken(token : string) : Promise<RefreshToken | null>{

@@ -1,10 +1,11 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException, RequestTimeoutException, UnauthorizedException } from '@nestjs/common';
 import { UserService } from 'src/user/providers/user.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from "bcrypt";
 import { LoginUserDto } from 'src/user/dto/loginUser.dto';
 import { RefreshTokenService } from './refresh-token.service';
-import { warn } from 'node:console';
+import { User } from 'src/user/user.entity';
+import { AuthResponseDto } from '../dto/auth.response.dto';
 
 @Injectable()
 export class AuthService {
@@ -14,19 +15,31 @@ export class AuthService {
         ,private readonly refreshTokenService : RefreshTokenService
     ){}
 
-    /// logging business logic
+    public async signIn(loginUserDto : LoginUserDto) : Promise<AuthResponseDto>{
+        let user : User | null = null;
+        try {
+            user = await this.usersService.findUserByLogin(loginUserDto.login)
+        } catch (error) {
+            throw new BadRequestException("User with this Login does not exist");
+        }
 
-    public async signIn(loginUserDto : LoginUserDto) : Promise<{access_token:string, refreshToken : string}>{
-        const user = await this.usersService.findUserByLogin(loginUserDto.login);
         console.log(user);
+
         if(!user || !(await bcrypt.compare(loginUserDto.password, user.password))){
-            throw new Error("Something went wrong with logging in !");
+            throw new UnauthorizedException("Something went wrong with logging in !");
         }
         const payload = {sub : user.id, login : user.login};
-        console.log(payload);
-        const access_token = await this.jwtService.signAsync(payload);
-        const refreshToken = await this.refreshTokenService.generateRefreshToken(user)
-        return {access_token, refreshToken: refreshToken.token};
+        console.log(payload);     
+
+        try {
+            let accessToken = this.jwtService.sign(payload);
+            let refreshTokenEntity = await this.refreshTokenService.generateRefreshToken(user);
+            let refreshToken = refreshTokenEntity.token
+            return {accessToken, refreshToken}
+
+        } catch (error) {
+            throw new InternalServerErrorException("Loging error");
+        }
     }
 
     public async refreshAccessToken(refreshToken : string) : Promise<{access_token : string}> {
@@ -37,7 +50,7 @@ export class AuthService {
 
         const user = await this.usersService.findUserById(refreshTokenEntity.userId);
         if(!user){
-            throw new Error("User not found ! ");
+            throw new BadRequestException("User not found !");
         }
 
         const payload = {sub : user.id, login : user.login};

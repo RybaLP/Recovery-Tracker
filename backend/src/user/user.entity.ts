@@ -1,28 +1,46 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { RefreshToken } from "src/auth/refreshToken.entity";
 
 @Entity()
 export class User{
     @PrimaryGeneratedColumn()
     id : number;
 
-    @Column()
-    firstName : string;
-
-    @Column()
-    lastName : string;
+    @Column({
+        nullable : true,
+        length : 25,
+        type : 'varchar'
+    })
+    firstName? : string;
 
     @Column({
+        nullable : true,
+        length : 25,
+        type : 'varchar'
+    })
+    lastName? : string;
+
+    @Column({
+        nullable : false,
         unique : true,
+        length : 20
     })
     login : string;
 
-    @Column()
+    @Column({
+        type: 'varchar',
+        length: 96,
+        nullable: false,
+    })
     password : string;
 
-    @Column()
+    @Column({
+        type : 'varchar',
+        length : 45,
+        nullable : false
+    })
     email : string;
 
-    @Column()
-    refreshTokens : string;
-
+    @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user)
+    refreshTokens: RefreshToken[];
 }
