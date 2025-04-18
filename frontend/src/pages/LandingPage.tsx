@@ -1,35 +1,15 @@
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@radix-ui/react-dropdown-menu"
+import Navbar from "@/components/Navbar"
 
 
 const LandingPage = () => {
   return (
-    <div className="flex items-center justify-center">
-    <Card className="p-10">
-
-      <CardHeader>
-        <CardTitle>RecoveryTracker</CardTitle>
-        <CardDescription>Please Sign In</CardDescription>
-      </CardHeader>
-      <Input placeholder="login"></Input>
-      <Input placeholder="password"></Input>
-      
-      <Button className="bg-green-400">
-        Submit
-      </Button>
-  
-  </Card>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 pt-16">
+      <Navbar/>
+      <div className="p-4">
+        <h1>Weolcome to home page</h1>
+        <p></p>
+      </div>
     </div>
   )
 }
-
-export default LandingPage
+export default LandingPage;

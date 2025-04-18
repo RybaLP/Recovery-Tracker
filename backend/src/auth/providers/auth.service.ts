@@ -7,6 +7,7 @@ import { RefreshTokenService } from './refresh-token.service';
 import { User } from 'src/user/user.entity';
 import { AuthResponseDto } from '../dto/auth.response.dto';
 
+
 @Injectable()
 export class AuthService {
     constructor(
@@ -35,6 +36,7 @@ export class AuthService {
             let accessToken = this.jwtService.sign(payload);
             let refreshTokenEntity = await this.refreshTokenService.generateRefreshToken(user);
             let refreshToken = refreshTokenEntity.token
+            console.log("Loggin came successfuly! ");
             return {accessToken, refreshToken}
 
         } catch (error) {

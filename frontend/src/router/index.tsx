@@ -1,7 +1,8 @@
-import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from "@/pages/LandingPage";
 import LoginPage from "@/pages/LoginPage";
+import RegisterPage from "@/pages/RegisterPage";
+import { Toaster } from "react-hot-toast";
 
 
 const router = createBrowserRouter([
@@ -13,12 +14,21 @@ const router = createBrowserRouter([
     {
         path : '/login',
         element : <LoginPage/>
+    },
+
+    {
+        path : '/register',
+        element : <RegisterPage/>
     }
     
 ]);
 
 function AppRouter(){
-    return <RouterProvider router={router}/>;
+    return <>
+          <RouterProvider router={router}/>
+          <Toaster/>
+    </>
+  
 }
 
 export default AppRouter;

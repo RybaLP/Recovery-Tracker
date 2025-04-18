@@ -23,7 +23,6 @@ export class UserController {
     })
     @ApiBadRequestResponse({description: "User with provived fields already exists"})
     @ApiInternalServerErrorResponse({description : "Server error"})
-    
     async create(@Body(ValidationPipe) createUserDto : CreateUserDto){
         return this.userService.register(createUserDto);
     }
