@@ -9,6 +9,94 @@
   text-align: center;
 }
 
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%); 
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0); 
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateY(-100%); 
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); 
+    opacity: 1;
+  }
+}
+
+
+/* Animation for card compoonent when is light */
+
+@keyframes cardHoverGrowLight {
+  0% {
+    transform: scale(1);
+    background-color: white;
+    color: #4b5563; 
+  }
+  100% {
+    transform: scale(1.05); 
+    background-color: orange; 
+    color: aqua;
+  }
+}
+
+/* Animation for card compoonent when is Dark */
+
+@keyframes cardHoverGrowDark {
+  0% {
+    transform: scale(1);
+    background-color: #1e293b; 
+    color: #d1d5db; 
+  }
+  100% {
+    transform: scale(1.05);
+    background-color: #ff8c00; 
+    color: #00bfff;
+  }
+}
+
+.card-hover-animation-light {
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease, color 0.3s ease;
+}
+
+.card-hover-animation-light:hover {
+  transform: scale(1.05);
+  background-color: orange;
+  color: aqua;
+}
+
+.card-hover-animation-dark {
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease, color 0.3s ease;
+}
+
+.card-hover-animation-dark:hover {
+  transform: scale(1.05);
+  background-color: #ff8c00;
+  color: #00bfff;
+}
+
+
+
 .logo {
   height: 6em;
   padding: 1.5em;

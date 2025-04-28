@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { IRegisterUser } from "@/interfaces/registerUser"
 import { useState } from "react"
 import * as EmailValidator from 'email-validator';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 
 const RegisterPage = () => {
