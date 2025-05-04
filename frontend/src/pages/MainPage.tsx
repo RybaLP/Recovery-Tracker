@@ -1,8 +1,12 @@
 import React from 'react'
+import EmptyAddictionsList from '@/components/emptyaddictionslist'
 
 const MainPage = () => {
   return (
-    <div></div>
+    <div>
+
+      <EmptyAddictionsList/>
+    </div>
   )
 }
 

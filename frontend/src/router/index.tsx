@@ -3,6 +3,7 @@ import LandingPage from "@/pages/LandingPage";
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import { Toaster } from "react-hot-toast";
+import MainPage from "@/pages/MainPage";
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
     {
         path : '/register',
         element : <RegisterPage/>
+    },
+
+    {
+        path: '/main',
+        element: <MainPage/>
     }
     
 ]);
