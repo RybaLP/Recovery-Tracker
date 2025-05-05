@@ -6,14 +6,16 @@ import { LoginUserDto } from './dto/loginUser.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from './user.entity';
+import { CreateUserProvider } from './providers/create-user';
 
 
 @ApiTags('User credentials')
 @Controller('user')
 export class UserController {
 
-    constructor(private readonly userService : UserService){}
-
+    constructor(private readonly userService : UserService,
+                    private readonly createUserProvider : CreateUserProvider
+    ){}
     
     @Post('register')
     @ApiOperation({summary : 'Registering new user'})
@@ -24,6 +26,6 @@ export class UserController {
     @ApiBadRequestResponse({description: "User with provived fields already exists"})
     @ApiInternalServerErrorResponse({description : "Server error"})
     async create(@Body(ValidationPipe) createUserDto : CreateUserDto){
-        return this.userService.register(createUserDto);
+        this.userService.createUser(createUserDto);
     }
 }
