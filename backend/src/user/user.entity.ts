@@ -1,3 +1,4 @@
+import { Addiction } from "src/addiction/addiction.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -40,5 +41,8 @@ export class User{
         nullable : false
     })
     email : string;
+
+    @OneToMany(()=>Addiction, addiction => addiction.user)
+    addictions : Addiction[]
 
 }

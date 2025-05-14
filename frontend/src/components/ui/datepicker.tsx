@@ -10,9 +10,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "./popover"
+import useFormStore from "@/store"
+
  
 export function DatePickerDemo() {
-  const [date, setDate] = React.useState<Date>()
+  const date = useFormStore((state)=>state.date)
+  const setDate = useFormStore((state)=>state.setDate)
  
   return (
     <Popover>

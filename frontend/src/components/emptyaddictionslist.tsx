@@ -13,21 +13,40 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from './ui/button';
 import Navbar from './Navbar';
-import { TimePickerDemo } from './ui/timepicker';
-import { useState } from 'react';
 import { DatePickerDemo } from "./ui/datepicker";
+import TimePicker from "./timepicker";
+import useFormStore from "@/store";
+import DatePicker from "./datehtmlpicker";
+import { useState } from "react";
+import toast, {Toaster} from "react-hot-toast";
 
 const EmptyAddictionsList = () => {
 
-    const [date, setDate] = useState<Date | undefined>(undefined);
-    const [addiction, setAddiction] = useState("");
+    const createdSuccessfuly = () => toast("Addiction created successfuly! ");
+
+
+    const addictionName = useFormStore((state) => state.addictionName);
+    const setAddictionName = useFormStore((state) => state.setAddictionName);
+    const date = useFormStore((state) => state.date);
+    const hours = useFormStore((state) => state.hours);
+    const minutes = useFormStore((state) => state.minutes);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+    const hanndleSave = () => {
+        console.log('Zapisuję:', { addictionName, date, hours, minutes });
+        console.log("", isDialogOpen);
+        setIsDialogOpen(false);
+        createdSuccessfuly();
+        console.log("setted to false", isDialogOpen);
+
+    }
 
     return (
         <>
             <Navbar />
             <div>
 
-                <Card className='flex flex-col items-center p-15'>
+                <Card className='flex flex-col items-center p-15 overflow-visible'>
 
                     <CardTitle>
                         Any addictions yet?
@@ -35,11 +54,11 @@ const EmptyAddictionsList = () => {
 
                     <p>Click down there to add your addiction to track!</p>
 
-                    <Dialog>
+                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                         <DialogTrigger asChild>
                             <CiSquarePlus size={60} className='hover:cursor-pointer' />
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px] overflow-visible">
+                        <DialogContent className="!overflow-visible sm:max-w-[425px]">
                             <DialogHeader>
                                 <DialogTitle>Add Addiction</DialogTitle>
                             </DialogHeader>
@@ -48,28 +67,32 @@ const EmptyAddictionsList = () => {
                                     <Label htmlFor="name" className="text-right">
                                         Addiction
                                     </Label>
-                                    <Input id="name" value="addiction example" className="col-span-3" />
+                                    <Input className="col-span-3" value={addictionName} onChange={(e)=>setAddictionName(e.target.value)}/>
                                 </div>
 
-                                <div className='flex gap-5'>
+                                <div className='flex gap-5 overflow-visible'>
                                     <p>Choose Date</p>
-
+                                    <DatePicker/>
                                 </div>
 
-                                <div className='flex gap-5'><p>Chose since when</p><TimePickerDemo date={date} setDate={setDate}/></div>
+                                <div className='flex gap-5'><p>Chose since when</p>
+                                    <TimePicker/>
+                                </div>
                             </div>
 
                             <DialogFooter>
-                                <Button type="submit">Save changes</Button>
+                                <Button type="submit" onClick={hanndleSave}>Save changes</Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
 
                 </Card>
-
+                <Toaster/>
             </div>
         </>
     )
 }
 
 export default EmptyAddictionsList
+
+

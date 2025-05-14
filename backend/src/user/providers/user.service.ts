@@ -8,8 +8,6 @@ import { AuthService } from 'src/auth/providers/auth.service';
 import { CreateUserProvider } from './create-user';
 // import { LoginUserDto } from '../dto/loginUser.dto';
 
-
-
 @Injectable()
 export class UserService {
 

@@ -10,6 +10,8 @@ import { User } from 'src/user/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import jwtConfig from './config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
+import { GenerateTokensProvider } from './providers/generate-tokens.provider';
+import { RefreshTokensProvider } from './providers/refresh-tokens.provider';
 
 
 @Module({
@@ -17,7 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
   providers: [AuthService, {
     provide : HashingProvider,
     useClass : BcryptProvider  /// in hashing provider is an abstract class
-  }, SignInProvider],                  
+  }, SignInProvider, GenerateTokensProvider, RefreshTokensProvider],                  
   imports : [forwardRef(()=>UserModule),ConfigModule.forFeature(jwtConfig),
     JwtModule.registerAsync(jwtConfig.asProvider()),
     TypeOrmModule.forFeature([User])

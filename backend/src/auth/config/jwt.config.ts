@@ -4,6 +4,7 @@ export default registerAs('jwt', ()=>{
         secret : "mysupersecret",
         audience : "eloasd",
         issuer : "dsadsa",
-        accessTokenTtl : "3600"
+        accessTokenTtl : 3600,
+        refreshTokenTtl : 86400
     };
 })

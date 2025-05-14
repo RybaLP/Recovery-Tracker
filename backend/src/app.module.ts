@@ -5,6 +5,14 @@ import { Module } from "@nestjs/common"
 import { User } from './user/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import jwtConfig from './auth/config/jwt.config';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
+import { AuthenticationGuardTsGuard } from './auth/guards/authentication.guard.ts/authentication.guard.ts.guard';
+import { AddictionModule } from './addiction/addiction.module';
+import { Addiction } from './addiction/addiction.entity';
 
 
 @Module({
@@ -17,12 +25,21 @@ import { AuthModule } from './auth/auth.module';
       username: 'postgres',
       password: 'elozelo',
       database: 'addiction-application',
-      entities: [User],
+      entities: [User, Addiction],
       synchronize: true,
     }),
     AuthModule,
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync(jwtConfig.asProvider()),
+    AddictionModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,{provide : APP_GUARD, useClass : AuthenticationGuardTsGuard},
+    AccessTokenGuard
+  ], 
+  // this line of code (except appservice) makes the whole application guarded, 
+  // that means, every endpoint requires authorization, to disable it, just delete 
+  // this object with configuration
+
 })
 export class AppModule { }

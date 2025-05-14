@@ -1,0 +1,9 @@
+POST http://localhost:3000/addiction/create
+Content-Type : application/json
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiZmlsbGRkZGRAZ21haWwuY29tIiwibG9naW4iOiJzb25pYzQ3IiwiaWF0IjoxNzQ3MTQ4OTMyLCJleHAiOjE3NDcxNTI1MzIsImF1ZCI6ImVsb2FzZCIsImlzcyI6ImRzYWRzYSJ9.fKNb7_wP2PYK5gje8BnDxYn6l0s_y2ia-5IOfdxwiIw
+
+{
+    "addictionName": "Oglądanie seriali",
+    "notes": "Próbuję ograniczyć od wczoraj wieczora.",
+    "startTime": "2025-05-12T20:00:00.000Z"
+}
