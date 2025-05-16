@@ -2,6 +2,10 @@
 @import "tw-animate-css";
 
 
+.combobox-popover {
+  z-index: 2000; /* Ensure this is higher than the Dialog's overlay z-index */
+}
+
 @custom-variant dark (&:is(.dark *));
 #root {
   max-width: 1280px;

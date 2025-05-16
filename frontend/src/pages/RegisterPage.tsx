@@ -8,6 +8,7 @@ import * as EmailValidator from 'email-validator';
 import toast from 'react-hot-toast';
 
 
+
 const RegisterPage = () => {
 
     const notifySuccessful = () => toast('Register successful!');
@@ -29,7 +30,7 @@ const RegisterPage = () => {
 
         e.preventDefault()
 
-        const { login, password, email} = registerData;
+        const { login, password, email, firstName, lastName} = registerData;
         if (!login || !password || !email) {
             alert("Please fill in all fields.");
             return;

@@ -1,27 +1,29 @@
 import { ILoginUser } from "@/interfaces/loginUser";
 import { IRegisterUser } from "@/interfaces/registerUser";
-import axios from "axios";
-
-const baseUrl : string = "http://localhost:3000"
-const registerUrl : string = "/user/register"
-const loginUrl : string = "/auth/login"
+import apiClient from "./axiosConfig";
+import { REGISTER_URL, LOGIN_URL } from "./constants/endpoints";
+import { Tokens } from "@/types/auth";
 
 
+export const RegisterUser = async (registerData : IRegisterUser) : Promise<void> => {
+    try {
+      const response = await apiClient.post(REGISTER_URL, registerData);
+      console.log("Registered successfuly");
+      return response.data;
 
-export const RegisterUser = async (registerData : IRegisterUser) => {
-    await axios.post(baseUrl + registerUrl, registerData).then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    } catch (error) {
+      throw error;
+    }
 }
 
-export const LoginUser = async (loginData : ILoginUser) => {
-    await axios.post(baseUrl + loginUrl, loginData).then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+export const LoginUser = async (loginData : ILoginUser) : Promise<Tokens | undefined> => {
+    try {
+        const response = await apiClient.post(LOGIN_URL, loginData)
+        if(response && response.data){
+          return response.data as Tokens
+        }
+
+    } catch (error) {
+        throw error;
+    }
 }

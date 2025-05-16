@@ -15,29 +15,22 @@ import { Button } from './ui/button';
 import Navbar from './Navbar';
 import { DatePickerDemo } from "./ui/datepicker";
 import TimePicker from "./timepicker";
-import useFormStore from "@/store";
 import DatePicker from "./datehtmlpicker";
 import { useState } from "react";
 import toast, {Toaster} from "react-hot-toast";
+import { ComboboxDemo } from '@/components/ui/combobox'
+
 
 const EmptyAddictionsList = () => {
 
     const createdSuccessfuly = () => toast("Addiction created successfuly! ");
 
-
-    const addictionName = useFormStore((state) => state.addictionName);
-    const setAddictionName = useFormStore((state) => state.setAddictionName);
-    const date = useFormStore((state) => state.date);
-    const hours = useFormStore((state) => state.hours);
-    const minutes = useFormStore((state) => state.minutes);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-
     const hanndleSave = () => {
-        console.log('Zapisuję:', { addictionName, date, hours, minutes });
-        console.log("", isDialogOpen);
-        setIsDialogOpen(false);
-        createdSuccessfuly();
-        console.log("setted to false", isDialogOpen);
+        // console.log('Zapisuję:', { addictionName, date, hours, minutes });
+        // console.log("", isDialogOpen);
+        // setIsDialogOpen(false);
+        // createdSuccessfuly();
+        // console.log("setted to false", isDialogOpen);
 
     }
 
@@ -54,20 +47,25 @@ const EmptyAddictionsList = () => {
 
                     <p>Click down there to add your addiction to track!</p>
 
-                    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <Dialog>
                         <DialogTrigger asChild>
                             <CiSquarePlus size={60} className='hover:cursor-pointer' />
                         </DialogTrigger>
-                        <DialogContent className="!overflow-visible sm:max-w-[425px]">
+                  <DialogContent
+                    className={"lg:max-w-screen-lg overflow-y-scroll max-h-screen flex items-center flex-col"}
+                    >
                             <DialogHeader>
                                 <DialogTitle>Add Addiction</DialogTitle>
                             </DialogHeader>
                             <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="name" className="text-right">
+                                <div className="flex flex-col gap-2">
+                                    <Label htmlFor="name">
                                         Addiction
                                     </Label>
-                                    <Input className="col-span-3" value={addictionName} onChange={(e)=>setAddictionName(e.target.value)}/>
+                                    <div className="p-4">
+                                        <ComboboxDemo/>
+                                    </div>
+                
                                 </div>
 
                                 <div className='flex gap-5 overflow-visible'>
@@ -89,6 +87,7 @@ const EmptyAddictionsList = () => {
                 </Card>
                 <Toaster/>
             </div>
+        <ComboboxDemo/>
         </>
     )
 }

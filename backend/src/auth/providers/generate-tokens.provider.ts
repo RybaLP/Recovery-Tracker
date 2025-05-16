@@ -6,7 +6,6 @@ import { User } from 'src/user/user.entity';
 import { ActiveUserData } from '../interfaces/active-user-data.interface';
 
 
-
 @Injectable()
 export class GenerateTokensProvider {
     constructor(
