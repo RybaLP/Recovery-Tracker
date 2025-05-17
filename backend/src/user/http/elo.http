@@ -1,12 +1,12 @@
 
 POST http://localhost:3000/user/register
 Content-Type: application/json
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiYWRtaW5hZG1pbkBnbWFpbC5jb20iLCJsb2dpbiI6ImFkbWluYWRtaW4iLCJpYXQiOjE3NDY2OTc0NTMsImV4cCI6MTc0NjcwMTA1MywiYXVkIjoiZWxvYXNkIiwiaXNzIjoiZHNhZHNhIn0.sU0G6AHGJRUt9ZzkgRJ6S3Fw2tHn4bV7kaUkcqEZPLc
+# Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiYWRtaW5hZG1pbkBnbWFpbC5jb20iLCJsb2dpbiI6ImFkbWluYWRtaW4iLCJpYXQiOjE3NDY2OTc0NTMsImV4cCI6MTc0NjcwMTA1MywiYXVkIjoiZWxvYXNkIiwiaXNzIjoiZHNhZHNhIn0.sU0G6AHGJRUt9ZzkgRJ6S3Fw2tHn4bV7kaUkcqEZPLc
 
 {
-    "login" : "elozetrzy",
-    "password" : "Elo!@asd23",
-    "email" : "myemail@gmail.com",
-    "firstname" : "kongo",
-    "lastname" : "kongotv"
+    "login" : "AdminAcc",
+    "password" : "AdminAcc1!",
+    "email" : "adminacc@gmail.com",
+    "firstname" : "kongdo",
+    "lastname" : "kongodtv"
 }

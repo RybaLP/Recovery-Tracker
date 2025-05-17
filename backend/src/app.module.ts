@@ -13,6 +13,7 @@ import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard'
 import { AuthenticationGuardTsGuard } from './auth/guards/authentication.guard.ts/authentication.guard.ts.guard';
 import { AddictionModule } from './addiction/addiction.module';
 import { Addiction } from './addiction/addiction.entity';
+import { UserService } from './user/providers/user.service';
 
 
 @Module({

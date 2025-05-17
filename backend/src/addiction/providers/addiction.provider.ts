@@ -6,6 +6,7 @@ import { Addiction } from "../addiction.entity";
 import { CreateAddictionDto } from "../dto/create-addiction.dto";
 import { UserService } from "src/user/providers/user.service";
 import { ActiveUserData } from "src/auth/interfaces/active-user-data.interface";
+import { ActiveUser } from "src/auth/decorator/active-user.decorator";
 
 @Injectable()
 export class CreateAddictionProvider {
@@ -14,6 +15,10 @@ export class CreateAddictionProvider {
         private readonly userService: UserService,
         @InjectRepository(Addiction)
         private readonly addictionRepository: Repository<Addiction>
+        ,
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>
+
     ) { }
 
 
@@ -40,4 +45,5 @@ export class CreateAddictionProvider {
             });
         }
     }
+
 }

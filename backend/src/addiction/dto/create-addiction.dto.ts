@@ -8,10 +8,9 @@ export class CreateAddictionDto {
 
     @IsOptional()
     @IsString()
-    notes : string
+    notes? : string
 
     @IsNotEmpty()
     @IsDate()
     startTime : Date
-    
 }

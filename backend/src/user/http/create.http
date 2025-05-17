@@ -1,0 +1,9 @@
+POST http://localhost:3000/addiction/create
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImVtYWlsIjoidW5pcXVlZW1AZ21haWwuY29tIiwibG9naW4iOiJBZG1pbkFjYyIsImlhdCI6MTc0NzQ3MDU1NCwiZXhwIjoxNzQ3NDc0MTU0LCJhdWQiOiJlbG9hc2QiLCJpc3MiOiJkc2Fkc2EifQ.PwA_fOBRc3E0rBScGz-qihVAFa1qOciv-Zao-CvsNFQ
+Content-Type : application/json
+
+{
+  "addictionName": "Smoking",
+  "notes": "Rzucam paczkę dziennie",
+  "startTime": "2025-05-17T09:30:00.000Z"
+}

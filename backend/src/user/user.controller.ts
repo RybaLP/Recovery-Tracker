@@ -24,9 +24,8 @@ export class UserController {
     // @UseGuards(AccessTokenGuard)
 
 
-    @Post('register')
     // @SetMetadata('authType', 'None') 
-
+    @Post('register')
     @Auth(AuthType.None, AuthType.Bearer)
     @ApiOperation({summary : 'Registering new user'})
     @ApiCreatedResponse({
