@@ -1,4 +1,3 @@
-import * as React from "react"
 import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
  
@@ -10,13 +9,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "./popover"
-import useFormStore from "@/store"
-
+import useFormStore from "@/store/addictionStore"
  
 export function DatePickerDemo() {
-  const date = useFormStore((state)=>state.date)
-  const setDate = useFormStore((state)=>state.setDate)
- 
+
+  const date = useFormStore((state)=>state.date);
+  const setDate = useFormStore((state)=>state.setDate);
+  
   return (
     <Popover>
       <PopoverTrigger asChild>

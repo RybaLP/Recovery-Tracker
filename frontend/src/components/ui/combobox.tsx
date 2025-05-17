@@ -16,9 +16,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import useFormStore from "@/store/addictionStore"
 
 
-const frameworks = [
+const addictions = [
+
   {
     value: "alcochol",
     label: "Alcochol🍾",
@@ -54,8 +56,10 @@ const frameworks = [
 ]
 
 export function ComboboxDemo() {
+  const addiction = useFormStore((state)=>state.addictionName);
+  const setAddiction = useFormStore((state)=>state.setAddictionName);
+
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -66,35 +70,35 @@ export function ComboboxDemo() {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
+          {addiction
+            ? addictions.find((a) => a.value === addiction)?.label
+            : "Select addiction..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
 
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search framework..." />
+          <CommandInput placeholder="Search addiction..." />
           <CommandList>
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {addictions.map((a) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
+                  key={a.value}
+                  value={a.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                    setAddiction(currentValue === addiction ? "" : currentValue)
                     setOpen(false)
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      addiction === a.value ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {framework.label}
+                  {a.label}
                 </CommandItem>
               ))}
             </CommandGroup>

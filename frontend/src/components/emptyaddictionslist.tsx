@@ -9,29 +9,47 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from './ui/button';
 import Navbar from './Navbar';
-import { DatePickerDemo } from "./ui/datepicker";
 import TimePicker from "./timepicker";
 import DatePicker from "./datehtmlpicker";
-import { useState } from "react";
 import toast, {Toaster} from "react-hot-toast";
 import { ComboboxDemo } from '@/components/ui/combobox'
+import useFormStore from "@/store/addictionStore";
+import { DatePickerDemo } from "./ui/datepicker";
 
 
 const EmptyAddictionsList = () => {
 
     const createdSuccessfuly = () => toast("Addiction created successfuly! ");
 
-    const hanndleSave = () => {
-        // console.log('Zapisuję:', { addictionName, date, hours, minutes });
-        // console.log("", isDialogOpen);
-        // setIsDialogOpen(false);
-        // createdSuccessfuly();
-        // console.log("setted to false", isDialogOpen);
+    const time = useFormStore().time;
+    const notes = useFormStore().notes;
+    const addictionName = useFormStore().addictionName;
 
+    const date = useFormStore((state)=>state)
+    const getFullDateTime = useFormStore().getFullDateTime
+    const clearForm = useFormStore().clearForm
+
+    const hanndleSave = () => {
+        if(!addictionName){
+            toast.error("Please select an addiction")
+        }        
+        if(!date){
+            toast.error("Please pick a date")
+        }
+        if(!time){
+            toast.error("Please pick time")
+        }
+        const fullDate = getFullDateTime();
+        if(!fullDate){
+            toast.error("Invalid date/time combination");
+            return;
+        }
+
+        toast.success("Addiction created successfuly! ");
+        clearForm();
     }
 
     return (
