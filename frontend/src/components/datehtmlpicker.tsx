@@ -1,6 +1,5 @@
 import React from 'react';
-import { useAuthStore } from '@/store/authStore';
-import useFormStore from '@/store/addictionStore';
+import useFormStore from '@/store/formStore';
 
 const DatePicker = () => {
 
@@ -8,8 +7,7 @@ const DatePicker = () => {
   const setDate = useFormStore((state)=>state.setDate)
 
   const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-     const newDateString = event.target.value;
-     setDate(newDateString);
+      setDate(event.target.value)
   };
 
   return (

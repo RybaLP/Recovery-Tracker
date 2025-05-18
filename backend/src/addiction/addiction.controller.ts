@@ -16,9 +16,9 @@ export class AddictionController {
         return this.addictionService.createAddiction(createAddictionDto, user);
     }
 
-    @Get('')
+    @Get()
     public getAddictions(@ActiveUser() user : ActiveUserData){
-                
+        return this.addictionService.fetchAddictionsByUser(user)
     }
 
     @Patch(':id')

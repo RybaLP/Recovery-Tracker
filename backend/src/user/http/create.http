@@ -1,9 +1,9 @@
 POST http://localhost:3000/addiction/create
-Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjcsImVtYWlsIjoidW5pcXVlZW1AZ21haWwuY29tIiwibG9naW4iOiJBZG1pbkFjYyIsImlhdCI6MTc0NzQ3MDU1NCwiZXhwIjoxNzQ3NDc0MTU0LCJhdWQiOiJlbG9hc2QiLCJpc3MiOiJkc2Fkc2EifQ.PwA_fOBRc3E0rBScGz-qihVAFa1qOciv-Zao-CvsNFQ
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiZmlsbGRkZGRAZ21haWwuY29tIiwibG9naW4iOiJzb25pYzQ3IiwiaWF0IjoxNzQ3NTYzNTk0LCJleHAiOjE3NDc1NjcxOTQsImF1ZCI6ImVsb2FzZCIsImlzcyI6ImRzYWRzYSJ9.gF_b3Owtkuxyv9an_s1FCdQ6_TEKwHhPSqLR3HcFHto
 Content-Type : application/json
 
 {
-  "addictionName": "Smoking",
-  "notes": "Rzucam paczkę dziennie",
+  "addictionName": "Saaaamoking",
+  "notes": "Rzudddcam paczkę dziennie",
   "startTime": "2025-05-17T09:30:00.000Z"
 }

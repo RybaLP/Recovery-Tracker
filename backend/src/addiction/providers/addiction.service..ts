@@ -21,7 +21,7 @@ export class AddictionService {
         return this.createAddictionProvider.createAddiction(createAddictionDto, user);
     }
 
-    public fetchAddictions(@ActiveUser() user : ActiveUserData){
+    public fetchAddictionsByUser(@ActiveUser() user : ActiveUserData){
         return this.fetchAddictionsProvider.fetchAddictionsUser(user);
     }
 

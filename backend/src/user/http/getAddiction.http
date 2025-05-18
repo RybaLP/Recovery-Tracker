@@ -1,0 +1,7 @@
+GET http://localhost:3000/addiction
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiZmlsbGRkZGRAZ21haWwuY29tIiwibG9naW4iOiJzb25pYzQ3IiwiaWF0IjoxNzQ3NTYyNjI5LCJleHAiOjE3NDc1NjYyMjksImF1ZCI6ImVsb2FzZCIsImlzcyI6ImRzYWRzYSJ9.Om9Rx8QR7slw-UB7PVAYwE0cdMtL2XTP3JDbLo5aA1w
+Content-Type : application/json
+
+{
+
+}

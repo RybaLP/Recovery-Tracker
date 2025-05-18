@@ -1,34 +1,18 @@
 import {create} from "zustand";
-import { FormState } from "@/types/formStore";
+import { fetchAddictionsByUser } from "@/api/addictionApi";
+import { AddictionStore } from "@/types/addictionStore";
 
-const useFormStore = create<FormState>((set, get) => ({
-  addictionName: '',
-  notes: '',
-  date: null,
-  time: '',
-  setAddictionName: (name) => set({ addictionName: name }),
-  setNotes: (notes) => set({ notes }),
-  setDate: (date) => set({ date }),
-  setTime: (time) => set({ time }),
-  getFullDateTime: () => {
-    const {date, time} = get()
-    if(!date || !time) return null
-
-    const [hours, minutes] = time.split(':').map(Number)
-    const fullDate = new Date(date)
-    fullDate.setHours(hours)
-    fullDate.setMinutes(minutes)
-    fullDate.setSeconds(0)
-    fullDate.setMilliseconds(0)
-
-    return fullDate
-  },
-  clearForm: () => set({
-    addictionName: '',
-    notes: '',
-    date: null,
-    time: '',
-  }),
+export const useAddictionStore = create<AddictionStore>((set)=>({
+    addictions : [],
+    loading : false,
+    error : null,
+    getAddictionByUser : async () => {
+        set({loading : true, error : null})
+        try {
+            const fetchedAddictions = await fetchAddictionsByUser();
+            set({addictions : fetchedAddictions , loading : false});
+        } catch (error) {
+            set({error : "error", loading : false})
+        }
+    },
 }))
-
-export default useFormStore

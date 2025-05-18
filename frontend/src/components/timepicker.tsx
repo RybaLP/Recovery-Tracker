@@ -1,5 +1,5 @@
 import React from 'react'
-import useFormStore from '@/store/addictionStore'
+import useFormStore from '@/store/formStore'
 
 const TimePicker = () => {
   const time = useFormStore((state) => state.time)

@@ -33,7 +33,6 @@ export class AuthenticationGuardTsGuard implements CanActivate {
       [context.getHandler(), context.getClass()]
     ) ?? [AuthenticationGuardTsGuard.defaultAuthType];
 
-    /// show auth types
     console.log(authTypes);
     const guards = authTypes.map((type)=>this.authTypeGuardMap[type]).flat();
     console.log(guards)

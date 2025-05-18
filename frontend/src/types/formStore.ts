@@ -1,11 +1,11 @@
 export interface FormState {
   addictionName: string
   notes: string
-  date: Date | null
+  date: string
   time: string 
   setAddictionName: (name: string) => void
   setNotes: (notes: string) => void
-  setDate: (date: Date | null) => void
+  setDate: (date: string) => void
   setTime: (time: string) => void
   getFullDateTime: () => Date | null
   clearForm: () => void

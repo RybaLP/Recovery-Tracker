@@ -1,18 +1,20 @@
-import React from 'react'
-import { Card } from './ui/card'
-const AddictionCard = () => {
-  return (
-    <div>
-        <Card>
+// import React from 'react'
+// import { Card } from './ui/card'
+
+
+
+// const AddictionCard = () => {
+  
+//   const addictionName =  
+  
+//   return (
+//     <div>
+//         <Card>
             
 
-        </Card>
+//         </Card>
+//     </div>
+//   )
+// }
 
-
-
-      
-    </div>
-  )
-}
-
-export default AddictionCard
+// export default AddictionCard

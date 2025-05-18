@@ -10,19 +10,17 @@ import { RefreshTokenDto } from './dto/refresh-token.dto';
 export class AuthController {
     constructor(private readonly authService : AuthService){}
 
-    @Auth(AuthType.None)
+    @Auth(AuthType.None, AuthType.Bearer)
     @Post()
     @HttpCode(HttpStatus.OK)
     public signIn(@Body() loginUserDto : LoginUserDto){
         return this.authService.signIn(loginUserDto);
     }
 
-    @Auth(AuthType.None)
+    @Auth(AuthType.None, AuthType.Bearer)
     @Post('refresh-tokens')
     public async refreshTokens(@Body() refreshTokensDto : RefreshTokenDto){
         return this.authService.refreshTokens(refreshTokensDto);
     }
-
-
     
 }

@@ -20,10 +20,7 @@ export class UserController {
                     private readonly createUserProvider : CreateUserProvider
     ){}
     
-
     // @UseGuards(AccessTokenGuard)
-
-
     // @SetMetadata('authType', 'None') 
     @Post('register')
     @Auth(AuthType.None, AuthType.Bearer)
