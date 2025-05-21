@@ -1,45 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import EmptyAddictionsList from '@/components/emptyaddictionslist'
 import { useAuthStore } from '@/store/authStore'
-import {jwtDecode} from "jwt-decode"
 import { useAutoRefreshToken } from '@/helpers/checkAuth'
-import { fetchAddictionsByUser } from '@/api/addictionApi'
-import { Addiction } from '@/types/addiction'
 import { useAddictionStore } from '@/store/addictionStore'
-
+import AddictionCard from '@/components/addictionCard'
 
 const MainPage = () => {
   /// when access token expires, refresh function creates new access token
   useAutoRefreshToken();
 
-  const refresh = useAuthStore((state)=>state.refresh)
   const refreshToken = useAuthStore((state)=>state.refreshToken)
   const accessToken = useAuthStore((state)=>state.accessToken)
+
   const addictions = useAddictionStore((state) => state.addictions);
   const getAddictionsByUser = useAddictionStore((state)=>state.getAddictionByUser)
-  const loading = useAddictionStore((state) => state.loading);
-  const error = useAddictionStore((state) => state.error);
 
   useEffect(()=>{
      getAddictionsByUser()
-  },[getAddictionsByUser])
+  },[getAddictionsByUser, accessToken]);
 
   console.log('access', accessToken);
   console.log('refresh' , refreshToken)
   
-   return (
-    <div>
+  return (
+    <div className="p-4">
       {addictions.length === 0 ? (
-        <EmptyAddictionsList />
+        <EmptyAddictionsList/>
       ) : (
-        <ul>
-          {addictions.map((addiction) => (
-            <li key={addiction.id}>{addiction.addictionName}</li> 
+        <div className='flex flex-wrap justify-center gap-6'>
+          {addictions.map((a)=>(
+            <AddictionCard addiction={a} key={a.id}/>
           ))}
-        </ul>
+        </div>
       )}
     </div>
-  );
+  )
 }
-
 export default MainPage

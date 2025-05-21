@@ -56,7 +56,6 @@ const EmptyAddictionsList = () => {
         <>
             <Navbar />
             <div>
-
                 <Card className='flex flex-col items-center p-15 overflow-visible'>
 
                     <CardTitle>
