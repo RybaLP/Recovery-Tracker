@@ -3,12 +3,9 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 import { Input } from "@/components/ui/input"
 import { ILoginUser } from "@/interfaces/loginUser"
 import { useState } from "react"
-import { LoginUser } from "@/api/userApi"
 import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom"
 import { useAuthStore } from "@/store/authStore"
-
-
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -51,7 +48,6 @@ const LoginPage = () => {
     }
 
   }
-
 
   return (
     <div>

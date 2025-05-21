@@ -15,10 +15,7 @@ const AddictionCard : React.FC<AddictionCardProps> = ({addiction}) => {
         <p className="font-medium text-blue-600">Czas trwania: {elapsedTime}</p>
       </CardContent>
     </Card>
-  );
-    
-
-    
+  );    
 }
 
 export default AddictionCard
